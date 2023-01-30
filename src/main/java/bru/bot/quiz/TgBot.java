@@ -1,4 +1,4 @@
-package org.example;
+package bru.bot.quiz;
 
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -8,17 +8,28 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
+
 
 public class TgBot extends TelegramLongPollingBot {
+
+    public String token;
+    public String name;
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getBotUsername() {
-        return "bruquiz_bot";
+        return name;
     }
 
     public String getBotToken() {
-        return "5635892140:AAHW3op-jIBNO1tEsXU8TvgHwQGqIHnUfaU";
+        return token;
     }
 
     private ArrayList<Questions> questions = new ArrayList<>() {{
@@ -83,7 +94,7 @@ public class TgBot extends TelegramLongPollingBot {
         System.out.println(question.getAnswer());
         System.out.println(answer);
 
-        if(question.getAnswer().trim().equals(answer.trim())) {
+        if (question.getAnswer().trim().equals(answer.trim())) {
             message = "Правильный ответ!";
         } else {
             message = "Попробуй еще!";
@@ -92,7 +103,7 @@ public class TgBot extends TelegramLongPollingBot {
         m.setText(message);
         m.setChatId(update.getMessage().getChatId());
 
-        try{
+        try {
             execute(m);
         } catch (TelegramApiException e) {
             e.printStackTrace();

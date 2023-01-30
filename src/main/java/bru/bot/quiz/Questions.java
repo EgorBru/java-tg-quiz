@@ -1,4 +1,4 @@
-package org.example;
+package bru.bot.quiz;
 
 import java.util.ArrayList;
 import java.util.Collections;
